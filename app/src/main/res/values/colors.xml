@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="white">#ffffff</color>
+    <color name="fPage1Blue">#60B3FF</color>
+    <color name="fPage2Grey">#616379</color>
+    <color name="fPage3Green">#70FB40</color>
+
+
+    <color name="tv_gray_deep">#818181</color>
+    <color name="tv_blue">#5DB8FF</color>
+    <color name="blue_main">#60B3FF</color>
+    <color name="deep_blue">#33748C</color>
+
+    <color name="transparent_half">#a0000000</color>
+    <color name="click">#cfe2f3</color>
+</resources>

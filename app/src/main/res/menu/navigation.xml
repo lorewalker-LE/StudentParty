@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_toolsbox"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_toolsbox" />
+
+    <item
+        android:id="@+id/navigation_timetable"
+        android:icon="@drawable/notebook2"
+        android:title="@string/title_timetable" />
+
+    <item
+        android:id="@+id/navigation_noteparty"
+        android:icon="@drawable/note1"
+        android:title="@string/title_noteparty" />
+
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@drawable/mine"
+        android:title="@string/title_mine"
+        />
+
+</menu>
