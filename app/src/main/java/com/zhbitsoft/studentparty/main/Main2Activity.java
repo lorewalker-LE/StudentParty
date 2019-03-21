@@ -7,11 +7,11 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.zhbitsoft.studentparty.R;
-import com.zhbitsoft.studentparty.module.beans.Student;
+import com.zhbitsoft.studentparty.module.beans.User;
 import com.zhbitsoft.studentparty.module.mine.MineFragment;
 import com.zhbitsoft.studentparty.module.noteparty.NotePartyFragment;
 import com.zhbitsoft.studentparty.module.timetable.TimeTableFragment;
@@ -21,8 +21,8 @@ public class Main2Activity extends AppCompatActivity {
 
     private FragmentTransaction transaction;
     private FragmentManager fragmentManager;
-    private    Student student;
-    // 设置默认进来是tab 显示的页面
+    private User user = User.getUser();
+
     private void setDefaultFragment(){
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
@@ -52,10 +52,9 @@ public class Main2Activity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_mine:
                     MineFragment mineFragment = new MineFragment();
+                   // mineFragment.refresh(user.getStudentName(),user.getStudentId());
+                    Log.d("sa",user.getStudentName());
                     transaction.replace(R.id.content,mineFragment);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("student",student);
-                    mineFragment.setArguments(bundle);
                     transaction.commit();
                     return true;
             }
@@ -67,8 +66,6 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        Intent i = getIntent();
-        student= i.getParcelableExtra("student");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setDefaultFragment();

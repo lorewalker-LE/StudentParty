@@ -1,26 +1,21 @@
 package com.zhbitsoft.studentparty.module.mine;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zhbitsoft.studentparty.R;
-import com.zhbitsoft.studentparty.module.beans.Student;
-import com.zhbitsoft.studentparty.module.mine.setting.SettingsActivity;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MineFragment extends Fragment {
 
+    private View view;
     public MineFragment() {
         // Required empty public constructor
     }
@@ -29,9 +24,14 @@ public class MineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bundle bundle = getArguments();
-        Student student = bundle.getParcelable("student");
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+        view = inflater.inflate(R.layout.fragment_mine, container, false);
+        return view;
     }
+
+   // public void refresh(String studentName,String studentNum){
+      //  TextView myName = (TextView) view.findViewById(R.id.myName);
+      //  TextView myNum = (TextView) view.findViewById(R.id.myNum);
+      //  myName.setText(studentName);
+      //  myNum.setText(studentNum);
+  //  }
 }

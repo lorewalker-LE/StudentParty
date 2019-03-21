@@ -17,32 +17,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 import com.zhbitsoft.studentparty.R;
 import com.zhbitsoft.studentparty.main.Main2Activity;
-import com.zhbitsoft.studentparty.module.beans.Student;
+import com.zhbitsoft.studentparty.module.beans.User;
 import com.zhbitsoft.studentparty.module.login.present.LoginPresent;
 import com.zhbitsoft.studentparty.module.login.present.LoginPresentImpl;
 import com.zhbitsoft.studentparty.module.login.view.LoginView;
-import com.zhbitsoft.studentparty.utils.Base64Utils;
 import com.zhbitsoft.studentparty.utils.HttpUtil;
-import com.zhbitsoft.studentparty.utils.SharedPreferencesUtils;
 import com.zhbitsoft.studentparty.widget.LoadingDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -181,6 +168,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                 //登录一般都是请求服务器来判断密码是否正确，要请求网络，要子线程
                 showLoading();//显示加载框
                 LoginRequest(getAccount(),getPassword()); //登陆
+                hideLoading();//隐藏加载框
                 break;
             case R.id.iv_see_password:
                 setPasswordVisibility();    //改变图片并设置输入框的文本可见或不可见
@@ -245,6 +233,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
      */
     public void showLoading() {
         if (mLoadingDialog == null) {
+
             mLoadingDialog = new LoadingDialog(LoginActivity.this, getString(R.string.loading), false);
         }
         mLoadingDialog.show();
@@ -348,7 +337,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                 e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
                 msg = "请检查网络";
                 showToast();
-                hideLoading();//隐藏加载框
             }
 
             @Override
@@ -361,17 +349,19 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                     if (result.equals("success")) {
                         loadCheckBoxState();//记录下当前用户记住密码和自动登录的状态
                         JSONObject json = (JSONObject) new JSONObject(responseData).get("student");
-                        Student student = new Student();
-                        student.setStudentId(json.getString("studentId"));
-                        student.setStudentName(json.getString("studentName"));
-                        student.setPassword(json.getString("password"));
-                        student.setSex(json.getString("sex"));
-                        student.setProfessional(json.getString("professional"));
-                        student.setCollegeId(json.getString("collegeId"));
-                        student.setClassId(json.getString("classId"));
-                        student.setStuTel(json.getString("stuTel"));
+                        User user = User.getUser();
+                        user.setStudentId(json.getString("studentId"));
+                        user.setStudentName(json.getString("studentName"));
+                        user.setPassword(json.getString("password"));
+                        user.setSex(json.getString("sex"));
+                        user.setProfessional(json.getString("professional"));
+                        user.setCollegeId(json.getString("collegeId"));
+                        user.setClassId(json.getString("classId"));
+                        user.setStuTel(json.getString("stuTel"));
+
+                        Log.d("asd",user.getClassId());
                         Intent i = new Intent(LoginActivity.this, Main2Activity.class);
-                        // i.putExtra("student",student);
+                        // i.putExtra("user",user);
                         startActivity(i);
                         finish();//关闭页面
                     } else {
@@ -388,7 +378,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                     showToast();
                 }
                 setLoginBtnClickable(true);  //这里解放登录按钮，设置为可以点击
-                hideLoading();//隐藏加载框
             }
         });
     }

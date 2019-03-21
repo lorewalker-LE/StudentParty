@@ -1,149 +1,169 @@
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/graybackground"
+    android:id="@+id/mine"
     tools:context=".module.mine.MineFragment">
 
     <LinearLayout
-        android:id="@+id/sdt_me"
+        android:background="@color/white"
+        android:id="@+id/myMesPanel"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="198dp"
-        android:background="@drawable/shape_bg_click"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="17dp"
-        android:paddingRight="17dp">
-
+        android:layout_height="0dp"
+        android:layout_weight="5">
+        <FrameLayout
+            android:id="@+id/pad"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:id="@+id/myMes"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+            <FrameLayout
+                android:id="@+id/padding_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/photo"
+                android:src="@drawable/my"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"/>
+            <FrameLayout
+                android:id="@+id/padding_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="13">
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+                    <TextView
+                        android:id="@+id/myName"
+                        android:text="myName"
+                        android:layout_gravity="bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+                    <TextView
+                        android:id="@+id/myNum"
+                        android:text="myNum"
+                        android:layout_gravity="top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
+            </LinearLayout>
+            <ImageView
+                android:src="@drawable/arrow"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"/>
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6">
+        <LinearLayout
+            android:id="@+id/myCollect"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:src="@drawable/collection"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <TextView
+                android:text="我的收藏"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"/>
+            <ImageView
+                android:src="@drawable/arrow"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/my" />
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="190dp"
-            android:layout_height="44dp"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="我的信息" />
+            android:background="#F0F0F0"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1" />
+        <LinearLayout
+            android:id="@+id/shaoyishao"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:src="@drawable/my"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <TextView
+                android:text="扫一扫"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"/>
+            <ImageView
+                android:src="@drawable/arrow"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:id="@+id/toolPanel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12">
 
     </LinearLayout>
 
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="200dp"
-    android:orientation="vertical">
 
-
-    <LinearLayout
-        android:id="@+id/sdt_wa"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/shape_bg_click"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="17dp"
-        android:paddingRight="17dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/my"/>
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="我的信息"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/collection"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/shape_bg_click"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="17dp"
-        android:paddingRight="17dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/collection"/>
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="收藏"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/detect"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@drawable/shape_bg_click"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="17dp"
-        android:paddingRight="17dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/collection"/>
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="扫一扫"/>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/setting_me"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/shape_bg_click"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="17dp"
-        android:paddingRight="17dp">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/me_setting"/>
-
-        <TextView
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp"
-            android:text="设置"/>
-
-    </LinearLayout>
 </LinearLayout>
-
-
-</android.support.design.widget.CoordinatorLayout>
