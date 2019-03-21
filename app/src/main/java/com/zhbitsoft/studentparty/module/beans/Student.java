@@ -77,6 +77,7 @@ public class Student implements Parcelable {
         this.stuTel = stuTel;
     }
 
+    public  Student(){}
 
     public Student(String studentId,String studentName,String password,String sex,String professional,String classId,String collegeId,String stuTel){
         this.studentId=studentId;

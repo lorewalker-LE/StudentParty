@@ -24,6 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.zhbitsoft.studentparty.R;
 import com.zhbitsoft.studentparty.main.Main2Activity;
 import com.zhbitsoft.studentparty.module.beans.Student;
@@ -31,14 +33,20 @@ import com.zhbitsoft.studentparty.module.login.present.LoginPresent;
 import com.zhbitsoft.studentparty.module.login.present.LoginPresentImpl;
 import com.zhbitsoft.studentparty.module.login.view.LoginView;
 import com.zhbitsoft.studentparty.utils.Base64Utils;
+import com.zhbitsoft.studentparty.utils.HttpUtil;
 import com.zhbitsoft.studentparty.utils.SharedPreferencesUtils;
 import com.zhbitsoft.studentparty.widget.LoadingDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.Call;
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
 
 public class LoginActivity extends AppCompatActivity implements LoginView,View.OnClickListener, CompoundButton.OnCheckedChangeListener{
 
@@ -327,80 +335,63 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
 
     public  void LoginRequest(final String accountNumber, final String password) {
         //请求地址
-        String url = "http://127.0.0.1:8080/WebApplication1/LoginServlet";
-        String tag = "Login";    //注②
+        String url = "http://10.0.2.2:8080/WebApplication1/LoginServlet";
         setLoginBtnClickable(false);//点击登录后，设置登录按钮不可点击状态
-        //取得请求队列
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        RequestBody requestBody = new FormBody.Builder()
+                .add("AccountNumber",accountNumber)
+                .add("Password",password)
+                .build();
+        HttpUtil.sendOkHttpRequestPost(requestBody,url, new okhttp3.Callback() {
 
-        //防止重复请求，所以先取消tag标识的请求队列
-        requestQueue.cancelAll(tag);
-
-        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
-        final StringRequest request = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
-
-                            String result = jsonObject.getString("Result");
-
-                            if (result.equals("success")) {
-                                JSONObject stu = (JSONObject)new  JSONObject(response).get("student");
-                                Student student=null;
-                                student.setStudentId(stu.getString("studentId"));
-                                student.setStudentName(stu.getString("studentName"));
-                                student.setPassword(stu.getString("password"));
-                                student.setSex(stu.getString("sex"));
-                                student.setProfessional(stu.getString("professional"));
-                                student.setClassId(stu.getString("classId"));
-                                student.setCollegeId(stu.getString("collegeId"));
-                                student.setStuTel(stu.getString("stuTel"));
-                                loadCheckBoxState();//记录下当前用户记住密码和自动登录的状态
-                                Intent i = new Intent(LoginActivity.this,Main2Activity.class);
-                                i.putExtra("student",student);
-                                startActivity(i);
-                                finish();//关闭页面
-                            } else {
-                                msg="输入的登录账号或密码不正确";
-                                showToast();
-                            }
-                        } catch (JSONException e) {
-                            setLoginBtnClickable(true);  //这里解放登录按钮，设置为可以点击
-                            hideLoading();//隐藏加载框
-                            System.err.println(e.getMessage());//打印异常原因                   ==》  一般给用户看
-                            System.err.println(e.toString());//打印异常名称以及异常原因  ==》 很少使用
-                            e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
-                            msg="异常";
-                            showToast();
-                        }
-                        setLoginBtnClickable(true);  //这里解放登录按钮，设置为可以点击
-                        hideLoading();//隐藏加载框
-                    }
-                }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
+                msg = "请检查网络";
+                showToast();
+                hideLoading();//隐藏加载框
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                try {
+                    String responseData = response.body().string();
+                    Log.d("response", responseData);
+                    JSONObject jsonObject = (JSONObject) new JSONObject(responseData).get("params");
+                    String result = jsonObject.getString("Result");
+                    if (result.equals("success")) {
+                        loadCheckBoxState();//记录下当前用户记住密码和自动登录的状态
+                        JSONObject json = (JSONObject) new JSONObject(responseData).get("student");
+                        Student student = new Student();
+                        student.setStudentId(json.getString("studentId"));
+                        student.setStudentName(json.getString("studentName"));
+                        student.setPassword(json.getString("password"));
+                        student.setSex(json.getString("sex"));
+                        student.setProfessional(json.getString("professional"));
+                        student.setCollegeId(json.getString("collegeId"));
+                        student.setClassId(json.getString("classId"));
+                        student.setStuTel(json.getString("stuTel"));
+                        Intent i = new Intent(LoginActivity.this, Main2Activity.class);
+                        // i.putExtra("student",student);
+                        startActivity(i);
+                        finish();//关闭页面
+                    } else {
+                        msg = "输入的登录账号或密码不正确";
+                        showToast();
+                    }
+                } catch (JSONException e) {
+                    setLoginBtnClickable(true);  //这里解放登录按钮，设置为可以点击
+                    hideLoading();//隐藏加载框
+                    System.err.println(e.getMessage());//打印异常原因                   ==》  一般给用户看
+                    System.err.println(e.toString());//打印异常名称以及异常原因  ==》 很少使用
+                    e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
+                    msg = "异常";
+                    showToast();
+                }
                 setLoginBtnClickable(true);  //这里解放登录按钮，设置为可以点击
                 hideLoading();//隐藏加载框
-                msg="网络异常，请检查网络";
-                showToast();
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("AccountNumber", accountNumber);  //注⑥
-                params.put("Password", password);
-                return params;
-            }
-        };
-
-        //设置Tag标签
-        request.setTag(tag);
-
-        //将请求添加到队列中
-        requestQueue.add(request);
+        });
     }
+
 }
 
