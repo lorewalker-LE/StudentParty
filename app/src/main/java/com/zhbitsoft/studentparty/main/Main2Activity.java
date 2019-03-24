@@ -21,7 +21,7 @@ public class Main2Activity extends AppCompatActivity {
 
     private FragmentTransaction transaction;
     private FragmentManager fragmentManager;
-    private User user = User.getUser();
+
 
     private void setDefaultFragment(){
         fragmentManager = getSupportFragmentManager();
@@ -51,10 +51,7 @@ public class Main2Activity extends AppCompatActivity {
                     transaction.commit();
                     return true;
                 case R.id.navigation_mine:
-                    MineFragment mineFragment = new MineFragment();
-                   // mineFragment.refresh(user.getStudentName(),user.getStudentId());
-                    Log.d("sa",user.getStudentName());
-                    transaction.replace(R.id.content,mineFragment);
+                    transaction.replace(R.id.content,new MineFragment());
                     transaction.commit();
                     return true;
             }

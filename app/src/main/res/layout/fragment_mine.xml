@@ -10,12 +10,12 @@
     tools:context=".module.mine.MineFragment">
 
     <LinearLayout
-        android:background="@color/white"
         android:id="@+id/myMesPanel"
         android:orientation="vertical"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5">
+        android:layout_weight="7">
         <FrameLayout
             android:id="@+id/pad"
             android:layout_width="match_parent"
@@ -23,6 +23,9 @@
             android:layout_weight="1"/>
         <LinearLayout
             android:id="@+id/myMes"
+            android:background="@drawable/pressitem"
+            android:clickable="true"
+
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -54,7 +57,6 @@
                     android:layout_weight="2">
                     <TextView
                         android:id="@+id/myName"
-                        android:text="myName"
                         android:layout_gravity="bottom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -69,7 +71,6 @@
                     android:layout_weight="2">
                     <TextView
                         android:id="@+id/myNum"
-                        android:text="myNum"
                         android:layout_gravity="top"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -98,12 +99,14 @@
         android:layout_weight="6">
         <LinearLayout
             android:id="@+id/myCollect"
+            android:background="@drawable/pressitem"
+            android:clickable="true"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
             <ImageView
-                android:src="@drawable/collection"
+                android:src="@drawable/mycollect"
                 android:layout_gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -126,13 +129,15 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1" />
         <LinearLayout
-            android:id="@+id/shaoyishao"
+            android:id="@+id/myscan"
+            android:background="@drawable/pressitem"
+            android:clickable="true"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
             <ImageView
-                android:src="@drawable/my"
+                android:src="@drawable/myscan"
                 android:layout_gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -161,8 +166,73 @@
         android:id="@+id/toolPanel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="12">
-
+        android:layout_weight="14">
+        <LinearLayout
+            android:id="@+id/myset"
+            android:background="@drawable/pressitem"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:src="@drawable/myset"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <TextView
+                android:text="我的设置"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"/>
+            <ImageView
+                android:src="@drawable/arrow"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <ImageView
+            android:background="#F0F0F0"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1" />
+        <LinearLayout
+            android:id="@+id/myabout"
+            android:background="@drawable/pressitem"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:src="@drawable/myabout"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <TextView
+                android:text="关于我们"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"/>
+            <ImageView
+                android:src="@drawable/arrow"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <ImageView
+            android:background="#F0F0F0"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"></LinearLayout>
     </LinearLayout>
 
 
