@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.zhbitsoft.studentparty.R;
 import com.zhbitsoft.studentparty.main.Main2Activity;
-import com.zhbitsoft.studentparty.module.beans.User;
+import com.zhbitsoft.studentparty.module.beans.Student;
 import com.zhbitsoft.studentparty.module.login.present.LoginPresent;
 import com.zhbitsoft.studentparty.module.login.present.LoginPresentImpl;
 import com.zhbitsoft.studentparty.module.login.view.LoginView;
@@ -30,6 +30,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
@@ -324,7 +326,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
 
     public  void LoginRequest(final String accountNumber, final String password) {
         //请求地址
-        String url = "http://10.0.2.2:8080/WebApplication1/LoginServlet";
+        //String url = "http://10.0.2.2:8080/studentParty/LoginServlet";
+
+        String url = "http://192.168.43.65:8080/studentParty/LoginServlet";
         setLoginBtnClickable(false);//点击登录后，设置登录按钮不可点击状态
         RequestBody requestBody = new FormBody.Builder()
                 .add("AccountNumber",accountNumber)
@@ -334,9 +338,17 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
 
             @Override
             public void onFailure(Call call, IOException e) {
+                if (e instanceof SocketTimeoutException) {
+                    //判断超时异常
+                    msg = "连接超时";
+                    showToast();
+                }
+                if (e instanceof ConnectException) {
+                    msg = "连接异常";
+                    showToast();
+                }
+                hideLoading();
                 e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
-                msg = "请检查网络";
-                showToast();
             }
 
             @Override
@@ -349,19 +361,17 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                     if (result.equals("success")) {
                         loadCheckBoxState();//记录下当前用户记住密码和自动登录的状态
                         JSONObject json = (JSONObject) new JSONObject(responseData).get("student");
-                        User user = User.getUser();
-                        user.setStudentId(json.getString("studentId"));
-                        user.setStudentName(json.getString("studentName"));
-                        user.setPassword(json.getString("password"));
-                        user.setSex(json.getString("sex"));
-                        user.setProfessional(json.getString("professional"));
-                        user.setCollegeId(json.getString("collegeId"));
-                        user.setClassId(json.getString("classId"));
-                        user.setStuTel(json.getString("stuTel"));
-
-                        Log.d("asd",user.getClassId());
+                        Student student = Student.getStudent();
+                        student.setStudentId(json.getString("studentId"));
+                        student.setStudentName(json.getString("studentName"));
+                        student.setPassword(json.getString("password"));
+                        student.setSex(json.getString("sex"));
+                        student.setProfessional(json.getString("professional"));
+                        student.setCollegeId(json.getString("collegeId"));
+                        student.setClassId(json.getString("classId"));
+                        student.setStuTel(json.getString("stuTel"));
                         Intent i = new Intent(LoginActivity.this, Main2Activity.class);
-                        // i.putExtra("user",user);
+                        // i.putExtra("student",student);
                         startActivity(i);
                         finish();//关闭页面
                     } else {

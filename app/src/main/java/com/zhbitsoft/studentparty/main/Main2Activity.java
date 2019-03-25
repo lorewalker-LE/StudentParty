@@ -1,17 +1,14 @@
 package com.zhbitsoft.studentparty.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.zhbitsoft.studentparty.R;
-import com.zhbitsoft.studentparty.module.beans.User;
 import com.zhbitsoft.studentparty.module.mine.MineFragment;
 import com.zhbitsoft.studentparty.module.noteparty.NotePartyFragment;
 import com.zhbitsoft.studentparty.module.timetable.TimeTableFragment;

@@ -1,12 +1,9 @@
 package com.zhbitsoft.studentparty.module.beans;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+public class Student {
 
-public class User {
-
-    private static User user;
-    private User(){}
+    private static Student student;
+    private Student(){}
 
     private String studentId;
     private String studentName;
@@ -17,11 +14,11 @@ public class User {
     private String collegeId;
     private String stuTel;
 
-    public static User getUser(){
-        if(user == null){
-            user = new User();
+    public static Student getStudent(){
+        if(student == null){
+            student = new Student();
         }
-        return user;
+        return student;
     }
     public String getStudentId() {
         return studentId;

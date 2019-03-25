@@ -38,11 +38,31 @@
             android:label="@string/title_activity_main2" />
         <activity android:name=".module.login.LoginActivity" />
         <activity android:name=".module.mine.setting.SettingsActivity" />
-        <activity android:name=".module.mine.AboutMe" />
-        <activity android:name=".module.mine.Profile" />
-        <activity android:name=".module.mine.setting.HelpFeedback" />
-        <activity android:name=".module.mine.setting.NotifyWarn" />
-        <activity android:name=".module.mine.setting.AccountSafe"></activity>
+        <activity
+            android:name=".module.mine.AboutMe"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".module.mine.Profile"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".module.mine.setting.HelpFeedback"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".module.mine.setting.NotifyWarn"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".module.mine.setting.AccountSafe"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".module.mine.setting.ChgPwdByPho"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".module.mine.setting.ChgPwdByOld"
+            android:launchMode="singleTop" />
+        <activity android:name=".module.mine.setting.InputNewPwd" />
+        <activity android:name=".module.mine.setting.feedback_bug" />
+        <activity android:name=".module.mine.setting.feedback_change" />
+        <activity android:name=".module.mine.setting.feedback_other"></activity>
     </application>
 
 </manifest>

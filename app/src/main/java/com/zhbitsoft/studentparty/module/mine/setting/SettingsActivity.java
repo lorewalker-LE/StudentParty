@@ -43,6 +43,8 @@ public class SettingsActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.acc_safe:
+                    Intent t = new Intent(SettingsActivity.this,AccountSafe.class);
+                    startActivity(t);
                     break;
                 case R.id.notify:
                     break;

@@ -116,7 +116,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:text="tzjzle"
-                                android:textSize="20dp"/>
+                                android:textSize="10dp"/>
                         </LinearLayout>
                         <FrameLayout
                             android:layout_width="0dp"
@@ -174,7 +174,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:text="308850906@qq.com"
-                                android:textSize="20dp"/>
+                                android:textSize="10dp"/>
                         </LinearLayout>
                         <FrameLayout
                             android:layout_width="0dp"
@@ -215,7 +215,7 @@
                     <com.zhbitsoft.studentparty.widget.FitHeightTextView
                         android:id="@+id/myWeblogin"
                         android:layout_gravity="center"
-                        android:text="http://120.79.157.70:8080/StudentParty/"
+                        android:text="http://120.79.157.70:8080/studentParty/"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

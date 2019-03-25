@@ -1,7 +1,6 @@
 package com.zhbitsoft.studentparty.module.mine;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,14 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhbitsoft.studentparty.BaseFragment;
 import com.zhbitsoft.studentparty.R;
-import com.zhbitsoft.studentparty.module.beans.User;
+import com.zhbitsoft.studentparty.module.beans.Student;
 import com.zhbitsoft.studentparty.module.mine.setting.SettingsActivity;
-
-import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,7 +22,7 @@ import butterknife.BindView;
 public class MineFragment extends BaseFragment {
 
 
-    private User user = User.getUser();
+    private Student student = Student.getStudent();
     private View view;
     private  LinearLayout myMes;
     private  LinearLayout myCollect;
@@ -46,8 +42,8 @@ public class MineFragment extends BaseFragment {
         TextView myName = view.findViewById(R.id.myName);
         TextView myNum = view.findViewById(R.id.myNum);
         if(myName==null){Log.e("sad","error");}
-        String userName = user.getStudentName();
-        String userNum  = user.getStudentId();
+        String userName = student.getStudentName();
+        String userNum  = student.getStudentId();
         myName.setText(userName);
         myNum.setText(userNum);
     }
