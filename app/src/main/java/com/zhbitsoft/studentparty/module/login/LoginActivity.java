@@ -1,5 +1,6 @@
 package com.zhbitsoft.studentparty.module.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
     private LoginPresent loginPresent;
     private String msg="";
     private LoadingDialog mLoadingDialog;
+    private ProgressDialog dialog;
 
     // 返回的数据
     private String info;
@@ -102,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
             //登录一般都是请求服务器来判断密码是否正确，要请求网络，要子线程
             showLoading();//显示加载框
             LoginRequest(getAccount(),getPassword());//去登录就可以
-
+            hideLoading();
         }
     }
 
@@ -167,10 +169,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                     showToast();
                     return;
                 }
-                //登录一般都是请求服务器来判断密码是否正确，要请求网络，要子线程
                 showLoading();//显示加载框
                 LoginRequest(getAccount(),getPassword()); //登陆
-                hideLoading();//隐藏加载框
                 break;
             case R.id.iv_see_password:
                 setPasswordVisibility();    //改变图片并设置输入框的文本可见或不可见
@@ -236,7 +236,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
     public void showLoading() {
         if (mLoadingDialog == null) {
 
-            mLoadingDialog = new LoadingDialog(LoginActivity.this, getString(R.string.loading), false);
+            mLoadingDialog = new LoadingDialog(LoginActivity.this, "正在登陆", false);
         }
         mLoadingDialog.show();
     }
@@ -342,12 +342,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                     //判断超时异常
                     msg = "连接超时";
                     showToast();
+                    hideLoading();//隐藏加载框
+                    setLoginBtnClickable(true);
                 }
                 if (e instanceof ConnectException) {
                     msg = "连接异常";
                     showToast();
+                    hideLoading();//隐藏加载框
+                    setLoginBtnClickable(true);
                 }
-                hideLoading();
                 e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
             }
 
@@ -388,6 +391,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                     showToast();
                 }
                 setLoginBtnClickable(true);  //这里解放登录按钮，设置为可以点击
+                hideLoading();//隐藏加载框
             }
         });
     }

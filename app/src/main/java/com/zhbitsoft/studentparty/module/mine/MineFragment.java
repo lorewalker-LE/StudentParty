@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zhbitsoft.studentparty.BaseFragment;
+import com.zhbitsoft.studentparty.base.BaseFragment;
 import com.zhbitsoft.studentparty.R;
 import com.zhbitsoft.studentparty.module.beans.Student;
 import com.zhbitsoft.studentparty.module.mine.setting.SettingsActivity;

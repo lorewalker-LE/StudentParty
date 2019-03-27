@@ -62,7 +62,6 @@ public class InputNewPwd extends AppCompatActivity {
                 case R.id.submit:
                     showLoading();
                     chgPwdRequest(student.getStudentId(),newpassword.getText().toString());
-                    hideLoading();
                     break;
                 default:
                     break;
@@ -83,6 +82,7 @@ public class InputNewPwd extends AppCompatActivity {
                 e.printStackTrace();
                msg="请检查网络";
                 showToast();
+                hideLoading();
             }
 
             @Override
@@ -106,6 +106,7 @@ public class InputNewPwd extends AppCompatActivity {
                     }else {
                         msg="修改失败，请重试";
                         showToast();
+                        hideLoading();
                         finish();
                     }
                 } catch (JSONException e) {
@@ -125,13 +126,19 @@ public class InputNewPwd extends AppCompatActivity {
             }
         });
     }
+
     public void showLoading() {
         if (mLoadingDialog == null) {
 
-            mLoadingDialog = new LoadingDialog(InputNewPwd.this, getString(R.string.loading), false);
+            mLoadingDialog = new LoadingDialog(InputNewPwd.this, "正在登陆", false);
         }
         mLoadingDialog.show();
     }
+
+
+    /**
+     * 隐藏加载的进度框
+     */
     public void hideLoading() {
         if (mLoadingDialog != null) {
             runOnUiThread(new Runnable() {
@@ -141,13 +148,6 @@ public class InputNewPwd extends AppCompatActivity {
                 }
             });
 
-        }
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mLoadingDialog != null) {
-            mLoadingDialog.dismiss();
         }
     }
 }

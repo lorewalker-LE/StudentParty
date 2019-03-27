@@ -101,7 +101,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"></FrameLayout>
                     <com.zhbitsoft.studentparty.widget.FitHeightTextView
-                        android:text="请设置你的新密码"
+                        android:text="请设置你的新密码,仅接受数字和字母"
                         android:textStyle="bold"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -122,6 +122,7 @@
                     android:hint="请输入你的新密码"
                     android:textAlignment="center"
                     android:layout_width="match_parent"
+                    android:digits="0123456789qwertyuioplkjhgfdsazxcvbnm"
                     android:layout_height="0dp"
                     android:layout_weight="1"/>
             </LinearLayout>

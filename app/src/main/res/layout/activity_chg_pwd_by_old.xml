@@ -120,6 +120,7 @@
                 <EditText
                     android:id="@+id/oldpwd"
                     android:hint="请输入你的密码"
+                    android:digits="0123456789qwertyuioplkjhgfdsazxcvbnm"
                     android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"

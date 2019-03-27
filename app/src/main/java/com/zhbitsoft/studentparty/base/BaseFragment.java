@@ -1,4 +1,4 @@
-package com.zhbitsoft.studentparty;
+package com.zhbitsoft.studentparty.base;
 
 import android.support.v4.app.Fragment;
 
