@@ -61,7 +61,7 @@
             android:launchMode="singleTop" />
         <activity android:name=".module.mine.setting.InputNewPwd" />
         <activity android:name=".module.mine.setting.feedback_bug" />
-        <activity android:name=".module.mine.setting.feedback_change" />
+        <activity android:name=".module.mine.setting.feedback_common" />
         <activity android:name=".module.mine.setting.feedback_other"></activity>
     </application>
 

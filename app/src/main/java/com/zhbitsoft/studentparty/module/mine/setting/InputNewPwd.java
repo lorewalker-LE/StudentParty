@@ -130,7 +130,7 @@ public class InputNewPwd extends AppCompatActivity {
     public void showLoading() {
         if (mLoadingDialog == null) {
 
-            mLoadingDialog = new LoadingDialog(InputNewPwd.this, "正在登陆", false);
+            mLoadingDialog = new LoadingDialog(InputNewPwd.this, "正在修改", false);
         }
         mLoadingDialog.show();
     }

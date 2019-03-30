@@ -48,8 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
     private ImageView iv_see_password;
     private LoginPresent loginPresent;
     private String msg="";
-    private LoadingDialog mLoadingDialog;
-    private ProgressDialog dialog;
+    private  LoadingDialog mLoadingDialog;
 
     // 返回的数据
     private String info;
@@ -104,7 +103,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
             //登录一般都是请求服务器来判断密码是否正确，要请求网络，要子线程
             showLoading();//显示加载框
             LoginRequest(getAccount(),getPassword());//去登录就可以
-            hideLoading();
         }
     }
 
@@ -342,15 +340,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
                     //判断超时异常
                     msg = "连接超时";
                     showToast();
-                    hideLoading();//隐藏加载框
                     setLoginBtnClickable(true);
                 }
                 if (e instanceof ConnectException) {
                     msg = "连接异常";
                     showToast();
-                    hideLoading();//隐藏加载框
                     setLoginBtnClickable(true);
                 }
+                hideLoading();//隐藏加载框
                 e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
             }
 

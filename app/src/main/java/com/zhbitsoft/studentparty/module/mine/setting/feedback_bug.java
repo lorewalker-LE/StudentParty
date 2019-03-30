@@ -1,25 +1,19 @@
 package com.zhbitsoft.studentparty.module.mine.setting;
 
-import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
-import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -29,15 +23,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
 import com.zhbitsoft.studentparty.R;
-
-import java.lang.annotation.Target;
+import com.zhbitsoft.studentparty.utils.HideKeybordUtils;
+import com.zhbitsoft.studentparty.widget.LoadingDialog;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.File;
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Headers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 public class feedback_bug extends AppCompatActivity {
 
+    public static final String DEGREE_BUG = "1";
     public static final int IMAGE_OPEN = 1;
     private ImageView back;
     private EditText content;
@@ -45,6 +55,10 @@ public class feedback_bug extends AppCompatActivity {
     private EditText phone;
     private LinearLayout submit;
 
+    private String msg;
+    private LoadingDialog mLoadingDialog;
+
+    private String getpath[] = new String[3];
     private String pathImage;                //选择图片路径
     private Bitmap bmp;
     private GridView gridView;
@@ -53,7 +67,6 @@ public class feedback_bug extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_feedback_bug);
@@ -61,6 +74,9 @@ public class feedback_bug extends AppCompatActivity {
         event();
     }
     private void init(){
+        content = (EditText)findViewById(R.id.content);
+        wechat = (EditText)findViewById(R.id.wechat);
+        phone = (EditText)findViewById(R.id.phone);
         back = findViewById(R.id.back);
         gridView = (GridView) findViewById(R.id.showPicGrid);
         bmp = BitmapFactory.decodeResource(getResources(),R.drawable.gridview_addpic);
@@ -114,7 +130,57 @@ public class feedback_bug extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.submit:
+                    Log.v("te",content.getText().toString());
+                    for (int i=0;i<3;i++){
+                        if (getpath[i]!=null) {
+                           Log.d("int",String.valueOf(i));
+                            Log.v("show", getpath[i]);
+                        }
+                    }
+                    if (getpath[0]==null){
+                        Toast.makeText(feedback_bug.this,"请至少附上一张你的图片",Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if ("".equals(content.getText().toString().trim())){
+                        Toast.makeText(feedback_bug.this,"内容不能为空",Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    if ("".equals(wechat.getText().toString().trim())&&"".equals(phone.getText().toString().trim())){
+                        Toast.makeText(feedback_bug.this,"联系方式不能为空",Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                    StringBuilder con = new StringBuilder();
 
+                    if ("".equals(wechat.getText().toString().trim())&&!"".equals(phone.getText().toString().trim()))
+                    {
+                        if (phone.getText().length()==11) {
+                            con.append("phone:").append(phone.getText().toString().trim());
+                        }
+                        else {
+                            Toast.makeText(feedback_bug.this,"手机号码长度不对",Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+                    if (!"".equals(wechat.getText().toString().trim())&&"".equals(phone.getText().toString().trim()))
+                    {
+                        con.append("wechat:").append(wechat.getText().toString().trim());
+                    }
+                    if (!"".equals(wechat.getText().toString().trim())&&!"".equals(phone.getText().toString().trim()))
+                    {
+                        if (phone.getText().length()==11) {
+                            con.append("wechat:").append(wechat.getText().toString().trim())
+                               .append("&&phone:").append(phone.getText().toString().trim());
+                        }
+                        else {
+                            Toast.makeText(feedback_bug.this,"手机号码长度不对",Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                    }
+                    String contact = con.toString();
+                    Log.d("contact", contact);
+                    setBtnClickable(false);
+                    showLoading();
+                    fileUpload(getpath,content.getText().toString(),contact);
                     break;
                 default:
                     break;
@@ -130,6 +196,15 @@ public class feedback_bug extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 imageItem.remove(position);
+                getpath[position-1]=null;
+                for (int i=position-1;i<2;i++){
+                    getpath[i]=getpath[i+1];
+                    getpath[i+1]=null;
+                    if (i==0){
+                        getpath[i+1]=getpath[i+2];
+                        getpath[i+2]=null;
+                    }
+                }
                 simpleAdapter.notifyDataSetChanged();
             }
         });
@@ -163,6 +238,12 @@ public class feedback_bug extends AppCompatActivity {
                 cursor.moveToFirst();
                 pathImage = cursor.getString(cursor
                         .getColumnIndex(MediaStore.Images.Media.DATA));
+               for (int a=0;a<3;a++){
+                    if (getpath[a]==null){
+                        getpath[a]=pathImage;
+                        break;
+                    };
+                }
             }
         }  //end if 打开图片
     }
@@ -196,6 +277,145 @@ public class feedback_bug extends AppCompatActivity {
             //刷新后释放防止手机休眠后自动添加
             pathImage = null;
         }
+    }
+    public void setBtnClickable(boolean clickable) {
+        submit.setClickable(clickable);
+    }
+    public void fileUpload(String[] str,String content,String contact){
+        List<File> files= new ArrayList<>();
+        for (int i = 0; i < str.length; i++) {
+           if (str[i]!=null&&!"".equals(str[i])){
+               File file1 = new File(str[i]);
+               files.add(file1);
+
+           }
         }
+        MediaType MEDIA_TYPE_JPG = MediaType.parse("image/jpg");
+        if (files==null){
+            Toast.makeText(getApplicationContext(), "文件不存在，请修改文件路径", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String url = "http://192.168.43.65:8080/studentParty/FeedbackServlet";
+        MultipartBody.Builder multiBuilder=new MultipartBody.Builder();
+        for (File file : files) {
+            multiBuilder.addFormDataPart("file", file.getName(), RequestBody.create(MEDIA_TYPE_JPG, file));
+        }
+       Map<String,String> params  = new HashMap<>();
+       params.put("degree",DEGREE_BUG);
+       params .put("content",content);
+       params .put("contact",contact);
+       if (params != null && !params.isEmpty()) {
+           for (String key : params.keySet()) {
+                multiBuilder.addPart(
+                       Headers.of("Content-Disposition", "form-data; name=\"" + key + "\""),
+                       RequestBody.create(null, params.get(key)));
+          }
+      }
+        RequestBody multiBody=multiBuilder.build();
+        OkHttpClient okHttpClient=new OkHttpClient();
+        Request request=new   Request.Builder().url(url).post(multiBody).build();
+        Call call=okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                if (e instanceof SocketTimeoutException) {
+                    //判断超时异常
+                    msg = "连接超时";
+                    showToast();
+                    setBtnClickable(true);
+                }
+                if (e instanceof ConnectException) {
+                    msg = "连接异常";
+                    showToast();
+                    setBtnClickable(true);
+                }
+                hideLoading();//隐藏加载框
+                e.printStackTrace();//打印异常原因+异常名称+出现异常的位置
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                try {
+                              String responseData = response.body().string();
+                            Log.d("response", responseData);
+                            JSONObject jsonObject = (JSONObject) new JSONObject(responseData).get("feedback");
+                            String result = jsonObject.getString("Result");
+                            if (result.equals("success")){
+                                msg="提交成功";
+                                showToast();
+                                hideLoading();
+                                finish();
+                            }else {
+                                msg="提交失败,请稍后再试";
+                                showToast();
+                                hideLoading();
+                                finish();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            msg = "异常";
+                            setBtnClickable(true);
+                            showToast();
+                            hideLoading();
+                        }
+                    }
+        });
+    }
+
+
+    public void showToast() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(feedback_bug.this, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void showLoading() {
+        if (mLoadingDialog == null) {
+
+            mLoadingDialog = new LoadingDialog(feedback_bug.this, "正在提交", false);
+        }
+        mLoadingDialog.show();
+    }
+
+
+    /**
+     * 隐藏加载的进度框
+     */
+    public void hideLoading() {
+        if (mLoadingDialog != null) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mLoadingDialog.hide();
+                }
+            });
+
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                View view = getCurrentFocus();
+                HideKeybordUtils.hideKeyboard(ev, view, feedback_bug.this);//调用方法判断是否需要隐藏键盘
+                break;
+
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+    @Override
+    protected void onDestroy(){
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
+        super.onDestroy();
+    }
 }
 

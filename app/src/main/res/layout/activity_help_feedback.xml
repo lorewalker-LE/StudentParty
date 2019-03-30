@@ -145,7 +145,7 @@
                                     android:textAlignment="center"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="个人信息变更反馈" />
+                                    android:text="常见问题" />
                             </LinearLayout>
                             <FrameLayout
                                 android:layout_width="match_parent"
@@ -187,7 +187,7 @@
                                     android:textAlignment="center"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="我还有其他问题要问.." />
+                                    android:text="其他问题.." />
                             </LinearLayout>
                             <FrameLayout
                                 android:layout_width="match_parent"

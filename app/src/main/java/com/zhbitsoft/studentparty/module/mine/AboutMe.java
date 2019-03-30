@@ -32,12 +32,12 @@ public class AboutMe extends AppCompatActivity {
             switch (v.getId()){
                 case R.id.copywechat:
                     ClipboardManager wechat = (ClipboardManager) AboutMe.this.getSystemService(Context.CLIPBOARD_SERVICE);
-                    wechat.setText("13192265963");
+                    wechat.setText("tzjzle");
                     Toast.makeText(AboutMe.this,"已复制",Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.copyemail:
                     ClipboardManager email = (ClipboardManager) AboutMe.this.getSystemService(Context.CLIPBOARD_SERVICE);
-                    email.setText("308850906@qq.com");
+                    email.setText("308850906");
                     Toast.makeText(AboutMe.this,"已复制",Toast.LENGTH_SHORT).show();
                     break;
                 default:
