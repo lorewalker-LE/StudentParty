@@ -29,6 +29,7 @@ import com.zhbitsoft.studentparty.widget.LoadingDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.LitePal;
 
 import java.io.IOException;
 import java.net.ConnectException;
@@ -293,10 +294,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView,View.O
     /**
      * 页面销毁前回调的方法
      */
+    @Override
     protected void onDestroy() {
         if (mLoadingDialog != null) {
             mLoadingDialog.cancel();
-            mLoadingDialog = null;
         }
         super.onDestroy();
     }

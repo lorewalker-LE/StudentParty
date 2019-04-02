@@ -1,5 +1,7 @@
 package com.zhbitsoft.studentparty.module.start;
 
+import org.litepal.LitePal;
+
 public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.OnEnterIntoFinishListener{
     private SplashView mSplashView;
     private SplashInteractor mSplashInteractor;
@@ -20,6 +22,7 @@ public class SplashPresenterImpl implements SplashPresenter, SplashInteractor.On
 
     @Override
     public void isFirstOpen() {
+        LitePal.getDatabase();
         SplashActivityPermissionsDispatcher.startWelcomeGuideActivityWithCheck((SplashActivity) mSplashView);
     }
 

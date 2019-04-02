@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:background="@drawable/preview"
-tools:context=".module.timetable.TimeTableFragment">
-
-<!-- TODO: Update blank fragment layout -->
-<TextView
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="@string/title_timetable" />
+    tools:context=".module.timetable.TimeTableFragment">
+    <include layout="@layout/header_base_func"/>
+    <com.zhuangfei.timetable.view.WeekView
+    android:id="@+id/id_weekview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
 
+   <com.zhuangfei.timetable.TimetableView
+        android:id="@+id/id_timetableView"
+        app:max_slide_item="12"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       android:background="@drawable/bg2"/>
 </LinearLayout>

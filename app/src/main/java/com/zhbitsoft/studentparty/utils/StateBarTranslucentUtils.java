@@ -32,7 +32,7 @@ public class StateBarTranslucentUtils {
     public static void setStateBarColor(Activity activity) {
         // 设置状态栏颜色
         ViewGroup contentLayout = (ViewGroup) activity.findViewById(android.R.id.content);
-        setupStatusBarView(activity, contentLayout, activity.getResources().getColor(R.color.colorPrimaryDark));
+        setupStatusBarView(activity, contentLayout, activity.getResources().getColor(R.color.white));
 
         // 设置Activity layout的fitsSystemWindows
         View contentChild = contentLayout.getChildAt(0);

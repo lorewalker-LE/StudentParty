@@ -13,6 +13,7 @@ import com.zhbitsoft.studentparty.module.mine.MineFragment;
 import com.zhbitsoft.studentparty.module.noteparty.NotePartyFragment;
 import com.zhbitsoft.studentparty.module.timetable.TimeTableFragment;
 import com.zhbitsoft.studentparty.module.toolsbox.ToolsBoxFragment;
+import com.zhbitsoft.studentparty.utils.StateBarTranslucentUtils;
 
 public class Main2Activity extends AppCompatActivity {
 
