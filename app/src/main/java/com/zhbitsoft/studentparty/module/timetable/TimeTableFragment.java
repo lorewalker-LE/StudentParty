@@ -159,14 +159,14 @@ public class TimeTableFragment extends Fragment {
                     List<MySubject>listWeb = new ArrayList<>();
                     listWeb = gson.fromJson(responseData,listType);
                      if(listWeb!=null&&!listWeb.isEmpty()) {
-                    Iterator<MySubject> iter = listWeb.iterator();
-                    while (iter.hasNext()){
-                        MySubject mySubject = iter.next();
-                        List<MySubject> rep = DataSupport.select("name").where("name = ?",mySubject.getName()).find(MySubject.class);
-                        if (rep.size()==0) {
-                            mySubject.save();
-                        }
-                    }
+                             Iterator<MySubject> iter = listWeb.iterator();
+                             while (iter.hasNext()){
+                                 MySubject mySubject = iter.next();
+                                 List<MySubject> rep = DataSupport.select("name").where("name = ?",mySubject.getName()).find(MySubject.class);
+                                 if (rep.size()==0) {
+                                     mySubject.save();
+                                 }
+                             }
                 }
                    // setLoadLayout(false);
                    // setBtnClickable(true);  //这里解放登录按钮，设置为可以点击
