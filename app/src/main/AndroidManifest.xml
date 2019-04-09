@@ -64,7 +64,15 @@
         <activity android:name=".module.mine.setting.feedback_bug" />
         <activity android:name=".module.mine.setting.feedback_common" />
         <activity android:name=".module.mine.setting.feedback_other" />
-        <activity android:name=".module.toolsbox.getGrade"></activity>
+        <activity android:name=".module.toolsbox.getGrade" />
+        <activity android:name=".module.toolsbox.GetNotification" />
+        <activity
+            android:name=".module.toolsbox.NotiDetail"
+            android:launchMode="singleTop" />
+        <activity android:name=".module.mine.Collection" />
+        <activity android:name=".module.toolsbox.GetNews" />
+        <activity android:name=".module.toolsbox.NewsDetail"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>

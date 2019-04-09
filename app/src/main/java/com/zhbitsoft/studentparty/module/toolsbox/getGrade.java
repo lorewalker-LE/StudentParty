@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -298,7 +299,6 @@ public class getGrade extends AppCompatActivity {
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
                     if (response.isSuccessful()){
-                      //  String responseData = response.body().string();
                         Log.d("response", responseData);
                         Type listType = new TypeToken<List<Grade>>() {
                         }.getType();
@@ -323,11 +323,11 @@ public class getGrade extends AppCompatActivity {
                     if (e instanceof SocketTimeoutException) {
                         //判断超时异常
                         msg = "连接超时";
-                        //   showToast();
+                         showToast();
                     }
                     if (e instanceof ConnectException) {
                         msg = "连接异常";
-                        // showToast();
+                        showToast();
                     }
                     e.printStackTrace();
                 }
@@ -350,5 +350,13 @@ public class getGrade extends AppCompatActivity {
     @Override
     protected void onDestroy(){
         super.onDestroy();
+    }
+    public void showToast(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getGrade.this,msg,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

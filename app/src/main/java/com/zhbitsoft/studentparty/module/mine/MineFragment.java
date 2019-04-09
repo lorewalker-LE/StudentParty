@@ -64,6 +64,13 @@ public class MineFragment extends BaseFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        myCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),Collection.class);
+                startActivity(intent);
+            }
+        });
         myMes.setOnClickListener(new View.OnClickListener() {
 
             @Override
