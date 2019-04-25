@@ -69,15 +69,19 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, int i) {
-        News news = mNewsList.get(i);
-        if (news.time!=null) {
-            viewHolder.time.setText(news.time.toString());
+        if (mNewsList!=null&&mNewsList.size()>0) {
+            News news = mNewsList.get(i);
+            if (news.time != null) {
+                viewHolder.time.setText(news.time.toString());
+            } else {
+                viewHolder.time.setText("");
+            }
+            viewHolder.title.setText(news.title);
+            if (news.imgPath != null && !"".equals(news.imgPath.trim())) {
+                setPicBitmap(viewHolder.img, news.imgPath);
+            }
         }else {
-            viewHolder.time.setText("");
-        }
-        viewHolder.title.setText(news.title);
-        if (news.imgPath!=null&&!"".equals(news.imgPath.trim())) {
-            setPicBitmap(viewHolder.img, news.imgPath);
+            viewHolder.time.setText(" ");
         }
     }
 

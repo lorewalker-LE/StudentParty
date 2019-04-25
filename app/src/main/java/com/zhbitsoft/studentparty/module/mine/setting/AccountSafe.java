@@ -12,7 +12,7 @@ import com.zhbitsoft.studentparty.widget.TitleOnlyBack;
 public class AccountSafe extends AppCompatActivity {
 
     private TitleOnlyBack titleOnlyBack;
-    private LinearLayout byPhone;
+    //private LinearLayout byPhone;
     private LinearLayout byOld;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,12 @@ public class AccountSafe extends AppCompatActivity {
     }
     private void init(){
         titleOnlyBack = findViewById(R.id.title_accsafe);
-        byPhone = findViewById(R.id.chgbyphone);
+        //byPhone = findViewById(R.id.chgbyphone);
         byOld = findViewById(R.id.chgbyold);
     }
     private void event(){
         titleOnlyBack.setTitle("账号与安全");
-        byPhone.setOnClickListener(new CopyClickListener());
+      //  byPhone.setOnClickListener(new CopyClickListener());
         byOld.setOnClickListener(new CopyClickListener());
     }
     class CopyClickListener implements View.OnClickListener{
@@ -36,10 +36,6 @@ public class AccountSafe extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.chgbyphone:
-                    Intent i = new Intent(AccountSafe.this,ChgPwdByPho.class);
-                    startActivity(i);
-                    break;
                 case R.id.chgbyold:
                     Intent t = new Intent(AccountSafe.this,ChgPwdByOld.class);
                     startActivity(t);

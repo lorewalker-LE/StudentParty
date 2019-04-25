@@ -2,13 +2,11 @@ package com.zhbitsoft.studentparty.module.toolsbox;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,21 +20,16 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhbitsoft.studentparty.R;
+import com.zhbitsoft.studentparty.module.apply.apply_place;
+import com.zhbitsoft.studentparty.module.apply.myApply;
 import com.zhbitsoft.studentparty.module.beans.Student;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.lang.reflect.Type;
-import java.net.ConnectException;
 import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -54,13 +47,13 @@ public class ToolsBoxFragment extends Fragment {
     private Student student = Student.getStudent();
     private View view;
     private ImageView select;
-    private ImageView note;
-    private ImageView scan;
+    private ImageView placeapply;
+    private ImageView apply;
     private TextView notiMore;
     private TextView newsMore;
     private TextView notiTitle;
     private TextView notiContent;
-
+    private OkHttpClient client = new OkHttpClient();
     private ImageView newsImg;
     private TextView newsTitle;
     private LinearLayout noti;
@@ -86,8 +79,8 @@ public class ToolsBoxFragment extends Fragment {
 
     private void init() {
         select = view.findViewById(R.id.mySelect);
-        note = view.findViewById(R.id.myNote);
-        scan = view.findViewById(R.id.myScan);
+        placeapply = view.findViewById(R.id.placeapply);
+        apply = view.findViewById(R.id.apply);
         notiMore = view.findViewById(R.id.notiMore);
         newsMore = view.findViewById(R.id.newsMore);
         notiTitle = view.findViewById(R.id.title);
@@ -101,6 +94,8 @@ public class ToolsBoxFragment extends Fragment {
     private void even() {
         getNotiRequest(student.getStudentId());
         getNewsRequest();
+        apply.setOnClickListener(new imageOnclickListener());
+        placeapply.setOnClickListener(new imageOnclickListener());
         select.setOnClickListener(new imageOnclickListener());
         notiMore.setOnClickListener(new imageOnclickListener());
         noti.setOnClickListener(new imageOnclickListener());
@@ -116,9 +111,13 @@ public class ToolsBoxFragment extends Fragment {
                     Intent i = new Intent(getActivity(), getGrade.class);
                     startActivity(i);
                     break;
-                case R.id.myNote:
+                case R.id.apply:
+                    Intent z = new Intent(getActivity(), myApply.class);
+                    startActivity(z);
                     break;
-                case R.id.myScan:
+                case R.id.placeapply:
+                    Intent z1 = new Intent(getActivity(), apply_place.class);
+                    startActivity(z1);
                     break;
                 case R.id.newsMore:
                     Intent it = new Intent(getActivity(),GetNews.class);
@@ -160,7 +159,6 @@ public class ToolsBoxFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    OkHttpClient client = new OkHttpClient();
                     String url = "http://192.168.43.65:8080/studentParty/GetNotiServlet";
                     RequestBody requestBody = new FormBody.Builder()
                             .add("studentId", studentId)
@@ -205,7 +203,6 @@ public class ToolsBoxFragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    OkHttpClient client = new OkHttpClient();
                     String url = "http://192.168.43.65:8080/studentParty/GetNewsServlet";
                     Request request = new Request.Builder()
                             .url(url)

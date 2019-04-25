@@ -80,6 +80,7 @@ public class feedback_other extends AppCompatActivity {
                         break;
                     }
                     showLoading();
+                    setBtnClickable(false);
                     submit();
                     break;
                 case R.id.back:

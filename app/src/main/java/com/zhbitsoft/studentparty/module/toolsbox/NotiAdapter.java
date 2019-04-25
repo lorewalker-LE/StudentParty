@@ -46,10 +46,12 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 int position = holder.getAdapterPosition();
-                Notification notification = mNotiList.get(position);
-                Intent intent = new Intent(context,NotiDetail.class);
-                intent.putExtra("notify",notification);
-                context.startActivity(intent);
+                if (!"".equals(mNotiList.get(position).title.trim())&&!"暂无通知".equals(mNotiList.get(position).content.trim())) {
+                    Notification notification = mNotiList.get(position);
+                    Intent intent = new Intent(context, NotiDetail.class);
+                    intent.putExtra("notify", notification);
+                    context.startActivity(intent);
+                }
             }
         });
         return holder;
@@ -57,12 +59,18 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        Notification notification = mNotiList.get(i);
-        viewHolder.title.setText(notification.title);
-        viewHolder.content.setText(notification.content.replace("\\r"," ").replace("\\n","").replace("\\t",""));
-        if (notification.time!=null) {
-            viewHolder.time.setText(notification.time.toString());
+        if (mNotiList!=null&&mNotiList.size()>0) {
+            Notification notification = mNotiList.get(i);
+            viewHolder.title.setText(notification.title);
+            viewHolder.content.setText(notification.content.replace("\\r", " ").replace("\\n", "").replace("\\t", ""));
+            if (notification.time != null) {
+                viewHolder.time.setText(notification.time.toString());
+            } else {
+                viewHolder.time.setText("");
+            }
         }else {
+            viewHolder.title.setText(" ");
+            viewHolder.content.setText(" ");
             viewHolder.time.setText("");
         }
     }

@@ -1,4 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+MobSDK {
+    appKey "2acc4aaf3d131"
+    appSecret "3c78229085b87e0ce7d32b914bcd36af"
+    MobIM {}
+}
 
 android {
     compileSdkVersion 28

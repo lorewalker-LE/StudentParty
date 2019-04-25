@@ -2,7 +2,9 @@ package com.zhbitsoft.studentparty;
 
 import org.litepal.crud.DataSupport;
 
-public class MySubject extends DataSupport {
+import java.io.Serializable;
+
+public class MySubject extends DataSupport implements Serializable{
     private String name;
     private String room;
     private String teacher;

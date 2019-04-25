@@ -26,13 +26,11 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         acc_safe = findViewById(R.id.acc_safe);
-        notify = findViewById(R.id.notify);
         feedback = findViewById(R.id.help_feedback);
         logout = findViewById(R.id.logout);
         titleOnlyBack=(TitleOnlyBack)findViewById(R.id.title_set);
         titleOnlyBack.setTitle("我的设置");
         acc_safe.setOnClickListener(new SetOnClickListener());
-        notify.setOnClickListener(new SetOnClickListener());
         feedback.setOnClickListener(new SetOnClickListener());
         logout.setOnClickListener(new SetOnClickListener());
     }
@@ -45,8 +43,6 @@ public class SettingsActivity extends AppCompatActivity {
                 case R.id.acc_safe:
                     Intent t = new Intent(SettingsActivity.this,AccountSafe.class);
                     startActivity(t);
-                    break;
-                case R.id.notify:
                     break;
                 case R.id.help_feedback:
                     Intent i = new Intent(SettingsActivity.this,HelpFeedback.class);

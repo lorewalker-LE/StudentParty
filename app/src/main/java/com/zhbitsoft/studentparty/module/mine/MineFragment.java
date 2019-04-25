@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.zhbitsoft.studentparty.base.BaseFragment;
 import com.zhbitsoft.studentparty.R;
+import com.zhbitsoft.studentparty.module.apply.myApply;
 import com.zhbitsoft.studentparty.module.beans.Student;
 import com.zhbitsoft.studentparty.module.mine.setting.SettingsActivity;
 
@@ -26,7 +27,6 @@ public class MineFragment extends BaseFragment {
     private View view;
     private  LinearLayout myMes;
     private  LinearLayout myCollect;
-    private  LinearLayout myScan;
     private LinearLayout mySet;
     private  LinearLayout myabout;
     public MineFragment() {
@@ -55,7 +55,6 @@ public class MineFragment extends BaseFragment {
         initView();
          myMes = (LinearLayout) view.findViewById(R.id.myMes);
          myCollect = (LinearLayout) view.findViewById(R.id.myCollect);
-         myScan = (LinearLayout) view.findViewById(R.id.myscan);
          mySet = (LinearLayout) view.findViewById(R.id.myset);
          myabout = (LinearLayout) view.findViewById(R.id.myabout);
         return view;
@@ -67,7 +66,7 @@ public class MineFragment extends BaseFragment {
         myCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),Collection.class);
+                Intent intent = new Intent(getActivity(),myApply.class);
                 startActivity(intent);
             }
         });

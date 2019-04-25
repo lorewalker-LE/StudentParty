@@ -96,7 +96,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6">
+        android:layout_weight="3">
         <LinearLayout
             android:id="@+id/myCollect"
             android:background="@drawable/pressitem"
@@ -106,13 +106,13 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <ImageView
-                android:src="@drawable/mycollect"
+                android:src="@drawable/myapply"
                 android:layout_gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>
             <TextView
-                android:text="我的收藏"
+                android:text="请假条"
                 android:layout_gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -128,33 +128,7 @@
             android:background="#F0F0F0"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1" />
-        <LinearLayout
-            android:id="@+id/myscan"
-            android:background="@drawable/pressitem"
-            android:clickable="true"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-            <ImageView
-                android:src="@drawable/myscan"
-                android:layout_gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <TextView
-                android:text="扫一扫"
-                android:layout_gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"/>
-            <ImageView
-                android:src="@drawable/arrow"
-                android:layout_gravity="center_vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -166,7 +140,7 @@
         android:id="@+id/toolPanel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="14">
+        android:layout_weight="16">
         <LinearLayout
             android:id="@+id/myset"
             android:background="@drawable/pressitem"

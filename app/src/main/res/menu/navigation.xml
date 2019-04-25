@@ -4,17 +4,12 @@
     <item
         android:id="@+id/navigation_toolsbox"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_toolsbox" />
+        android:title="工具箱" />
 
     <item
         android:id="@+id/navigation_timetable"
         android:icon="@drawable/notebook2"
         android:title="@string/title_timetable" />
-
-    <item
-        android:id="@+id/navigation_noteparty"
-        android:icon="@drawable/note1"
-        android:title="@string/title_noteparty" />
 
     <item
         android:id="@+id/navigation_mine"

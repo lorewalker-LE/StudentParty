@@ -71,8 +71,14 @@
             android:launchMode="singleTop" />
         <activity android:name=".module.mine.Collection" />
         <activity android:name=".module.toolsbox.GetNews" />
-        <activity android:name=".module.toolsbox.NewsDetail"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".module.toolsbox.NewsDetail"
+            android:launchMode="singleTop" />
+        <activity android:name=".module.apply.ChatActivity" />
+        <activity android:name=".module.apply.apply" />
+        <activity android:name=".module.apply.myApply" />
+        <activity android:name=".module.apply.apply_place" />
+        <activity android:name=".module.apply.applyDetail"></activity>
     </application>
 
 </manifest>

@@ -157,6 +157,7 @@ public class TimeTableFragment extends Fragment {
                     Type listType = new TypeToken<List<MySubject>>(){}.getType();
                     Gson gson = new Gson();
                     List<MySubject>listWeb = new ArrayList<>();
+                    DataSupport.deleteAll(MySubject.class);
                     listWeb = gson.fromJson(responseData,listType);
                      if(listWeb!=null&&!listWeb.isEmpty()) {
                              Iterator<MySubject> iter = listWeb.iterator();

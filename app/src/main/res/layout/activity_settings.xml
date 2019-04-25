@@ -84,66 +84,11 @@
                     android:layout_height="0dp"
                     android:layout_weight="1" />
             </LinearLayout>
-            <ImageView
+            <FrameLayout
                 android:background="#F0F0F0"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_2" />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
-                <LinearLayout
-                    android:id="@+id/notify"
-                    android:background="@drawable/pressitem"
-                    android:clickable="true"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
-
-                        <com.zhbitsoft.studentparty.widget.FitHeightTextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="8"
-                            android:text="通知与提醒"
-                            android:textSize="50dp" />
-
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="right"
-                                android:src="@drawable/arrow" />
-                        </FrameLayout>
-                    </LinearLayout>
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-                </LinearLayout>
-            </LinearLayout>
+                android:layout_weight="1" />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"

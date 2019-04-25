@@ -82,13 +82,14 @@
                 android:orientation="vertical"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <ImageView
-                    android:id="@+id/myNote"
-                    android:src="@drawable/note_main"
+                    android:id="@+id/placeapply"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/note_main" />
                 <TextView
-                    android:text="我的笔记"
+                    android:text="场地申请"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -114,13 +115,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <ImageView
-                    android:id="@+id/myScan"
-                    android:src="@drawable/scan_main"
+                    android:id="@+id/apply"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/jiatiao" />
                 <TextView
-                    android:text="扫码签到"
+                    android:text="请假条"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" />
             </LinearLayout>
@@ -135,10 +137,11 @@
                     android:orientation="vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
+
                     <TextView
-                        android:text="我的笔记"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="场地申请" />
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -157,10 +160,11 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
+
                     <TextView
-                        android:text="扫码签到"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="请假条呀" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
